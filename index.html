@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPRINT - Strategy Lab</title>
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts and Performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Dosis:wght@200..800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Design System Variables (LIGHT MODE DEFAULT) --- */
+        :root {
+            --color-bg-primary: #F8FAFC; 
+            --color-bg-card: #FFFFFF; 
+            --color-accent-blue: #3B82F6; 
+            --color-cooperate: #10B981; /* Emerald 500 */
+            --color-defect: #EF4444; /* Red 500 */
+            --color-text-primary: #1E293B; 
+            --color-text-secondary: #64748B; 
+            --color-border-subtle: #E2E8F0; 
+            --color-score-bg: #F1F5F9; 
+            --color-forgiveness: #10B981; 
+            --color-exploitation: #EF4444; 
+            --color-log-alt: #F8FAFC; 
+            --color-shadow: rgba(0, 0, 0, 0.1); 
+            --color-focus-ring: #60A5FA; /* Blue 400 */
+        }
+        
+        /* --- Design System Variables (DARK MODE) --- */
+        [data-theme="dark"] {
+            --color-bg-primary: #0F172A; 
+            --color-bg-card: #1E293B;   
+            --color-accent-blue: #60A5FA; 
+            --color-cooperate: #34D399; 
+            --color-defect: #F87171; 
+            --color-text-primary: #F1F5F9; 
+            --color-text-secondary: #94A3B8; 
+            --color-border-subtle: #334155; 
+            --color-score-bg: #11223A; 
+            --color-forgiveness: #34D399; 
+            --color-exploitation: #F87171; 
+            --color-log-alt: #1F2E40; 
+            --color-shadow: rgba(255, 255, 255, 0.05); 
+            --color-focus-ring: #3B82F6; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-wrapper {
+            padding: 1rem; 
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .content-wrapper {
+                padding: 3rem; 
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+        }
+
+        .card {
+            background-color: var(--color-bg-card);
+            box-shadow: 0 6px 16px var(--color-shadow); 
+            border: 1px solid var(--color-border-subtle); 
+            border-radius: 12px; 
+            transition: all 0.3s ease-out; 
+        }
+
+        .header-accent {
+            border-bottom: 3px solid var(--color-accent-blue);
+        }
+
+        .btn-action {
+            font-family: 'Dosis', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            transition: all 0.15s ease-out;
+            border-bottom: 4px solid rgba(0, 0, 0, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            color: white; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .btn-action:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px var(--color-focus-ring), 
+                        0 4px 0 rgba(0,0,0,0.3), 
+                        0 6px 16px var(--color-shadow);
+        }
+        .btn-action:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+        
+        .btn-action:disabled { 
+            opacity: 0.6; 
+            cursor: not-allowed; 
+            filter: grayscale(0.2); 
+            transform: none !important;
+            border-bottom-width: 4px;
+        }
+        
+        .font-precision {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        #outcome-card {
+            min-height: 150px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 0.2s ease-out, background-color 0.3s;
+        }
+
+        input[name="partner-strategy"]:checked + label {
+            background-color: var(--color-accent-blue) !important;
+            color: white !important;
+            font-weight: 600 !important;
+        }
+        
+        input[name="partner-strategy"] + label:focus-visible {
+            outline: 2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+            border-radius: 6px;
+        }
+
+        /* Strategic Balance Pivot Styling (Gauge) */
+        .gauge-pivot-container {
+            height: 24px; 
+            background-color: var(--color-border-subtle);
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px var(--color-shadow);
+        }
+        
+        .gauge-center-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--color-text-primary);
+            z-index: 5;
+        }
+        
+        .forgiveness-fill, .exploitation-fill {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: width 0.5s ease-out;
+            z-index: 2;
+        }
+        .forgiveness-fill {
+            right: 50%; 
+            background-color: var(--color-forgiveness);
+            transform-origin: 100% 50%;
+        }
+        .exploitation-fill {
+            left: 50%; 
+            background-color: var(--color-exploitation);
+            transform-origin: 0% 50%;
+        }
+        
+        .move-chip {
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: white;
+            box-shadow: 0 1px 3px var(--color-shadow);
+        }
+        .chip-c { background-color: var(--color-cooperate); }
+        .chip-d { background-color: var(--color-defect); }
+        
+        /* Transaction Log Scroll Limit */
+        #history-log-container {
+            max-height: 300px; /* Set a fixed height */
+            overflow-y: auto; /* Enable scrolling */
+            padding-right: 8px; /* Give room for the scrollbar */
+        }
+
+
+        /* Motion: Prefers Reduced Motion implementation */
+        @media (prefers-reduced-motion: reduce) {
+            body, .card, .btn-action, .forgiveness-fill, .exploitation-fill, #outcome-card {
+                transition-property: none !important;
+                transition-duration: 0s !important;
+                transition-delay: 0s !important;
+            }
+            #outcome-card {
+                box-shadow: 0 6px 16px var(--color-shadow) !important; 
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-[var(--color-bg-primary)]">
+    
+    <div class="content-wrapper w-full max-w-7xl mx-auto flex-grow">
+        <main id="app">
+            
+            <header class="card p-6 md:p-8 mb-8 header-accent flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl md:text-5xl font-black mb-1 text-[var(--color-accent-blue)]">
+                        IMPRINT
+                    </h1>
+                    <div class="mt-4 text-sm md:text-lg">
+                        <p class="text-[var(--color-text-secondary)] font-medium">
+                            Analyze <span class="font-bold">reciprocity</span>, <span class="font-bold">stability</span>, and the long-term cost of short-sighted choices.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-end space-y-3">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle-btn" type="button" class="p-2 rounded-full text-sm bg-[var(--color-score-bg)] hover:bg-[var(--color-border-subtle)] transition duration-150" aria-label="Toggle Dark Mode">
+                        <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- LIVE OUTCOME (PREVIEW) -->
+            <section id="outcome-card" class="card p-6 md:p-8 relative text-center mb-8 flex flex-col justify-center" 
+                    role="status" aria-live="polite" aria-atomic="true">
+                
+                <div id="round-display-top-right" class="absolute top-4 right-6 text-sm font-semibold text-[var(--color-text-secondary)] md:text-base">
+                    ROUND <span id="round-counter" class="font-black text-[var(--color-defect)] text-xl font-precision" aria-label="Current round number">0</span>
+                </div>
+
+                <div class="flex flex-col justify-center">
+                    <p id="outcome-message" class="text-3xl md:text-4xl font-black text-[var(--color-text-primary)] transition-colors duration-150">
+                        AWAITING INPUT
+                    </p>
+                    <p id="outcome-details" class="text-lg font-precision text-[var(--color-text-secondary)] mt-3 transition-colors duration-150"></p>
+                </div>
+            </section>
+
+            <!-- TRANSMIT PROTOCOL (DECISION CONTROLS) -->
+            <section class="card p-6 md:p-8 mb-8">
+                <h3 class="text-xl font-bold mb-6 text-[var(--color-text-primary)] border-b border-[var(--color-border-subtle)] pb-3">
+                    TRANSMIT PROTOCOL
+                </h3>
+                
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <button id="cooperate-btn" type="button" class="btn-action py-5 rounded-lg bg-[var(--color-cooperate)] border-b-[var(--color-cooperate)]/70 hover:opacity-90 whitespace-nowrap text-sm md:text-base">
+                        COOPERATE (C) <span class="text-xs font-mono ml-2 opacity-70">(Key C)</span>
+                    </button>
+                    <button id="defect-btn" type="button" class="btn-action py-5 rounded-lg bg-[var(--color-defect)] border-b-[var(--color-defect)]/70 hover:opacity-90 whitespace-nowrap text-sm md:text-base">
+                        DEFECT (D) <span class="text-xs font-mono ml-2 opacity-70">(Key D)</span>
+                    </button>
+                </div>
+
+                <!-- Seed and Probability Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 mb-6">
+                    <!-- Seed Input for Reproducibility -->
+                    <div>
+                        <label for="random-seed" class="text-sm font-semibold mb-2 block text-[var(--color-text-secondary)] uppercase">
+                            RANDOMNESS SEED
+                        </label>
+                        <input type="number" id="random-seed" placeholder="Enter a number for reproducible results" value="" 
+                               class="w-full p-2 border border-[var(--color-border-subtle)] rounded-lg bg-[var(--color-bg-card)] text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-blue)] transition">
+                        <p class="text-xs text-[var(--color-text-secondary)] mt-1">Changing the seed resets the simulation.</p>
+                    </div>
+
+                    <!-- Random Cooperate Probability Slider -->
+                    <div>
+                        <label for="random-cooperate-prob" class="text-sm font-semibold mb-2 block text-[var(--color-text-secondary)] uppercase">
+                            P(COOPERATE) FOR RANDOM <span id="prob-display" class="font-precision text-[var(--color-accent-blue)] ml-2">30%</span>
+                        </label>
+                        <input type="range" id="random-cooperate-prob" min="0" max="100" step="1" value="30" 
+                               class="w-full h-8 appearance-none bg-[var(--color-score-bg)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-blue)] cursor-pointer">
+                        <p class="text-xs text-[var(--color-text-secondary)] mt-1">Sets the likelihood of the Random algorithm cooperating.</p>
+                    </div>
+                </div>
+
+                <!-- Strategy Selector -->
+                <h3 class="text-sm font-semibold mb-3 text-[var(--color-text-secondary)] uppercase pt-4 border-t border-[var(--color-border-subtle)]">Opponent Algorithm:</h3>
+                <div id="strategy-selector" class="flex space-x-1 bg-[var(--color-score-bg)] p-2 rounded-lg mb-6" role="radiogroup" aria-label="Opponent Strategy Selection">
+                    
+                    <input type="radio" id="strategy-titfortat" name="partner-strategy" value="titfortat" checked class="sr-only">
+                    <label for="strategy-titfortat" tabindex="0" title="Tit-for-Tat: Cooperates on the first move, then mirrors your previous move." class="flex-1 text-center py-2 px-3 rounded-md text-sm text-[var(--color-text-secondary)] cursor-pointer transition-colors duration-200 hover:bg-[var(--color-border-subtle)]">🤖 TFT</label>
+                    
+                    <input type="radio" id="strategy-alwaysdefect" name="partner-strategy" value="alwaysdefect" class="sr-only">
+                    <label for="strategy-alwaysdefect" tabindex="0" title="Always Defect: Always defects, regardless of your history." class="flex-1 text-center py-2 px-3 rounded-md text-sm text-[var(--color-text-secondary)] cursor-pointer transition-colors duration-200 hover:bg-[var(--color-border-subtle)]">😈 ALL DEFECT</label>
+                    
+                    <input type="radio" id="strategy-grimtrigger" name="partner-strategy" value="grimtrigger" class="sr-only">
+                    <label for="strategy-grimtrigger" tabindex="0" title="Grim Trigger: Cooperates until you defect once, then defects forever." class="flex-1 text-center py-2 px-3 rounded-md text-sm text-[var(--color-text-secondary)] cursor-pointer transition-colors duration-200 hover:bg-[var(--color-border-subtle)]">💀 GRIM TRIGGER</label>
+
+                    <input type="radio" id="strategy-random" name="partner-strategy" value="random" class="sr-only">
+                    <label for="strategy-random" tabindex="0" title="Random: Makes a random move based on the input seed and P(C) slider." class="flex-1 text-center py-2 px-3 rounded-md text-sm text-[var(--color-text-secondary)] cursor-pointer transition-colors duration-200 hover:bg-[var(--color-border-subtle)]">🎲 RANDOM</label>
+                </div>
+                
+                <!-- Reset Button -->
+                <button id="reset-btn" type="button" class="w-full py-3 text-sm text-white bg-slate-600 hover:bg-slate-500 rounded-lg transition duration-150 shadow-md">
+                    RESET SIMULATION (Key R)
+                </button>
+            </section>
+
+            <!-- CORE METRICS CARD -->
+            <section class="card p-6 md:p-8 mb-8">
+                
+                <h2 class="text-2xl font-bold mb-6 text-[var(--color-text-primary)] border-b border-[var(--color-border-subtle)] pb-3">
+                    CUMULATIVE SYSTEM METRICS
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Total Penalty (Score Only) -->
+                    <div class="md:pr-6 md:border-r md:border-[var(--color-border-subtle)]">
+                        <p class="text-sm font-medium text-[var(--color-text-secondary)] uppercase">TOTAL PENALTY (COST TO YOU)</p>
+                        
+                        <!-- Score Display -->
+                        <div class="flex items-end justify-start">
+                            <p id="player-score" class="score-display text-7xl font-extrabold tracking-tighter font-precision text-[var(--color-cooperate)]" aria-label="Player's total accumulated penalty score">0</p>
+                        </div>
+                        
+                        <div class="text-sm mt-3 flex justify-between">
+                            <span class="font-semibold text-[var(--color-text-primary)]">Partner Penalty: 
+                                <span id="partner-score" class="font-precision text-[var(--color-text-secondary)]" aria-label="Partner's total accumulated penalty score">0</span>
+                            </span>
+                            <span class="text-[var(--color-text-secondary)]">Instability Tax: 
+                                <span id="instability-tax" class="font-precision text-[var(--color-defect)]" aria-label="Total accumulated instability tax">0</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Volatility Index -->
+                    <div class="mt-8 md:mt-0 md:pl-6">
+                        <p class="text-sm font-medium text-[var(--color-text-secondary)] uppercase flex items-center justify-between">
+                            STRATEGIC VOLATILITY (V-INDEX)
+                            <canvas id="sparkline-canvas" width="100" height="20" role="img"
+                                    aria-label="Player moves sparkline: high=cooperate, low=defect" class="rounded-sm"></canvas>
+                        </p>
+                        <p id="volatility-index" class="score-display text-7xl font-extrabold tracking-tighter font-precision text-[var(--color-accent-blue)]">0%</p>
+                        <p class="text-xs text-[var(--color-text-secondary)] mt-3">
+                            <span class="font-semibold">V-Tax Threshold:</span> Volatility in the <span class="font-bold">last 10 rounds</span> exceeding 70% adds cost.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- STRATEGIC BALANCE GAUGE -->
+            <section class="card p-6 md:p-8 mb-8">
+                <h3 class="text-xl font-bold mb-6 text-[var(--color-text-primary)] border-b border-[var(--color-border-subtle)] pb-3">
+                    STRATEGIC BALANCE (IMPRINT BIAS)
+                </h3>
+                
+                <div class="flex justify-between font-extrabold text-xl mb-1 font-precision">
+                    <span id="forgiveness-score" class="text-[var(--color-forgiveness)]">0%</span>
+                    <span id="exploitation-score" class="text-[var(--color-exploitation)]">0%</span>
+                </div>
+
+                <!-- Pivot Bar Container -->
+                <div class="gauge-pivot-container">
+                    <div id="forgiveness-fill" class="forgiveness-fill" style="width: 0%;"></div>
+                    <div id="exploitation-fill" class="exploitation-fill" style="width: 0%;"></div>
+                    <div class="gauge-center-line"></div>
+                </div>
+
+                <div class="flex justify-between text-xs font-bold mt-2 text-[var(--color-text-secondary)]">
+                    <span class="text-[var(--color-forgiveness)]">← FORGIVENESS (C | D)</span>
+                    <span class="text-[var(--color-exploitation)]">EXPLOITATION (D | C) →</span>
+                </div>
+                
+                <p class="text-xs text-[var(--color-text-secondary)] mt-4">
+                    Bias is measured by the <b>relative weight</b> of your calculated Forgiveness (C after D) vs. Exploitation (D after C) moves.
+                </p>
+            </section>
+
+            <!-- TRANSACTION LOG -->
+            <section class="card p-6 md:p-8 mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-[var(--color-text-primary)]">
+                        TRANSACTION LOG (History Feed)
+                    </h3>
+                    <button id="export-btn" type="button" class="py-1 px-3 text-sm text-white bg-[var(--color-accent-blue)] hover:bg-blue-600 rounded-lg transition duration-150 shadow-md">
+                        EXPORT LOG (CSV)
+                    </button>
+                </div>
+
+                <!-- History Log Headers -->
+                <div class="flex justify-between items-center text-xs text-[var(--color-text-secondary)] font-semibold border-b pb-2 mb-1 border-[var(--color-border-subtle)]">
+                    <span class="w-1/12 text-center">RND</span>
+                    <span class="w-2/12 text-center">P1 MOVE</span>
+                    <span class="w-2/12 text-center">P2 MOVE</span>
+                    <span class="w-2/12 text-right">P1 PNL</span>
+                    <span class="w-2/12 text-right">P2 PNL</span>
+                    <span class="w-2/12 text-right">V-IDX</span>
+                </div>
+                
+                <!-- Log content container (Now with max-height and scrolling via CSS) -->
+                <div id="history-log-container" class="space-y-0">
+                    <!-- Round data will appear here -->
+                </div>
+            </section>
+            
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="w-full text-center py-4 text-xs font-medium text-[var(--color-text-secondary)] border-t border-[var(--color-border-subtle)] mt-4 bg-[var(--color-bg-card)]">
+        Experimentation funded by the Elroydo Institute for Stability.
+    </footer>
+
+    <script>
+        // --- Configuration Constants ---
+        const CONFIG = {
+            V_INDEX_WINDOW: 10,
+            V_TAX_THRESHOLD_HIGH: 90, // >= 90% volatility triggers -2 penalty
+            V_TAX_THRESHOLD_LOW: 70,  // >= 70% volatility triggers -1 penalty
+            PAYOFF_MATRIX: {
+                'C': { 
+                    'C': { p1: -3, p2: -3, emoji: '🤝', message: 'MUTUAL STABILITY', color: 'var(--color-cooperate)'},
+                    'D': { p1: -10, p2: -1, emoji: '🔴', message: 'CRITICAL EXPLOITATION', color: 'var(--color-defect)'}
+                },
+                'D': {
+                    'C': { p1: -1, p2: -10, emoji: '🟡', message: 'SHORT-TERM GAIN', color: '#FCD34D'}, 
+                    'D': { p1: -5, p2: -5, emoji: '💥', message: 'MUTUAL DEGRADATION', color: '#F87171'}
+                }
+            }
+        };
+
+        // --- State Variables ---
+        let playerScore = 0;
+        let partnerScore = 0;
+        let roundCount = 0;
+        let currentStrategy = 'titfortat'; 
+        let moveHistory = []; 
+        let volatilityIndex = 0; 
+        let cAfterDCount = 0; 
+        let dAfterCCount = 0; 
+        let instabilityTax = 0; 
+        let randomCooperateProb = 0.3; 
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; 
+
+        // Seeded Randomness State (LCG)
+        let initialSeed = 1; // Stores the user-provided seed for export
+        let seed = 1; 
+        const LCG_A = 1664525; 
+        const LCG_C = 1013904223;
+        const LCG_M = Math.pow(2, 32); 
+        let keyInputDebouncing = false; 
+
+        // --- DOM Elements ---
+        const outcomeMessageEl = document.getElementById('outcome-message');
+        const outcomeDetailsEl = document.getElementById('outcome-details');
+        const playerScoreEl = document.getElementById('player-score');
+        const partnerScoreEl = document.getElementById('partner-score');
+        const instabilityTaxEl = document.getElementById('instability-tax');
+        const historyLogContainerEl = document.getElementById('history-log-container');
+        const cooperateBtn = document.getElementById('cooperate-btn');
+        const defectBtn = document.getElementById('defect-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const strategySelector = document.getElementById('strategy-selector');
+        const roundCounterEl = document.getElementById('round-counter'); 
+        const volatilityIndexEl = document.getElementById('volatility-index');
+        const forgivenessScoreEl = document.getElementById('forgiveness-score');
+        const exploitationScoreEl = document.getElementById('exploitation-score');
+        const forgivenessFillEl = document.getElementById('forgiveness-fill');
+        const exploitationFillEl = document.getElementById('exploitation-fill');
+        const outcomeCardEl = document.getElementById('outcome-card');
+        const themeToggleButton = document.getElementById('theme-toggle-btn');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const randomSeedInput = document.getElementById('random-seed');
+        const exportBtn = document.getElementById('export-btn');
+        const randomProbSlider = document.getElementById('random-cooperate-prob');
+        const probDisplay = document.getElementById('prob-display');
+        const sparklineCanvas = document.getElementById('sparkline-canvas');
+        const sparklineCtx = sparklineCanvas.getContext('2d');
+        
+        // --- Dynamic CSS Classes ---
+        const COOPERATIVE_CLASS = 'text-[var(--color-cooperate)]';
+        const WARNING_CLASS = 'text-yellow-500';
+        const CRITICAL_CLASS = 'text-[var(--color-defect)]';
+        const ACCENT_CLASS = 'text-[var(--color-accent-blue)]';
+        
+        /** Helper function to get computed CSS variables. */
+        function getCSSVar(name) {
+            // NOTE: name must include the leading '--'
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        }
+        
+        /** Resolves a color string which might be a hex code or a CSS variable. */
+        function resolveColor(token) {
+            if (token.startsWith('var(')) {
+                // Extracts '--color-name' from 'var(--color-name)'
+                const name = token.slice(4, -1); 
+                return getCSSVar(name) || token;
+            }
+            return token; // e.g. "#FCD34D"
+        }
+
+        /** Removes all possible dynamic color classes from an element. */
+        function removeDynamicColors(el) {
+            el.classList.remove(COOPERATIVE_CLASS, WARNING_CLASS, CRITICAL_CLASS, ACCENT_CLASS);
+        }
+
+        /** Updates the primary score color and volatility index color feedback using classList. */
+        function updateScoreColors() {
+            const magnitude = Math.abs(playerScore);
+            
+            const basePlayerClasses = 'score-display text-7xl font-extrabold tracking-tighter font-precision';
+            let dynamicPlayerClass;
+            
+            if (magnitude < 20) {
+                dynamicPlayerClass = COOPERATIVE_CLASS;       
+            } else if (magnitude < 80) {
+                dynamicPlayerClass = WARNING_CLASS;    
+            } else {
+                dynamicPlayerClass = CRITICAL_CLASS;                          
+            }
+
+            playerScoreEl.className = `${basePlayerClasses} ${dynamicPlayerClass}`;
+
+            removeDynamicColors(volatilityIndexEl);
+
+            if (volatilityIndex === 0) {
+                volatilityIndexEl.classList.add(ACCENT_CLASS);
+            } else if (volatilityIndex < 30) {
+                volatilityIndexEl.classList.add(COOPERATIVE_CLASS); 
+            } else if (volatilityIndex < 70) {
+                volatilityIndexEl.classList.add(WARNING_CLASS); 
+            } else {
+                volatilityIndexEl.classList.add(CRITICAL_CLASS); 
+            }
+        }
+        
+        /** Draws the sparkline representing the player's last N moves, handling retina display. */
+        function drawSparkline() {
+            if (!sparklineCtx) return; // Guard against missing context
+            
+            const history = moveHistory.slice(-CONFIG.V_INDEX_WINDOW).map(m => m.player === 'C' ? 1 : 0);
+            
+            // Retina scaling setup
+            const dpr = window.devicePixelRatio || 1;
+            const cssW = sparklineCanvas.clientWidth || 100;
+            const cssH = sparklineCanvas.clientHeight || 20;
+
+            // FIX: Set CSS size explicitly to prevent stretching on fluid layouts
+            sparklineCanvas.style.width = cssW + 'px';
+            sparklineCanvas.style.height = cssH + 'px';
+            
+            // Set canvas drawing buffer size (retina resolution)
+            sparklineCanvas.width = Math.round(cssW * dpr);
+            sparklineCanvas.height = Math.round(cssH * dpr);
+            
+            // Scale context to match physical pixels
+            sparklineCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            const w = cssW; 
+            const h = cssH;
+            const step = w / Math.max(1, CONFIG.V_INDEX_WINDOW - 1);
+            const lineY = h * 0.5;
+            const baseY = h * 0.9;
+            const peakY = h * 0.1;
+            
+            // Get colors from computed CSS variables (essential for Canvas)
+            const accent = getCSSVar('--color-accent-blue');
+            const coop = getCSSVar('--color-cooperate');
+            const defect = getCSSVar('--color-defect');
+
+
+            sparklineCtx.clearRect(0, 0, w, h);
+            
+            // Draw baseline
+            sparklineCtx.strokeStyle = accent;
+            sparklineCtx.lineWidth = 1;
+            sparklineCtx.beginPath();
+            sparklineCtx.moveTo(0, lineY);
+            sparklineCtx.lineTo(w, lineY);
+            sparklineCtx.stroke();
+            
+            // Draw stems and dots
+            for (let i = 0; i < history.length; i++) {
+                const x = i * step;
+                const y = history[i] ? peakY : baseY; // C = high, D = low
+                const col = history[i] ? coop : defect;
+
+                // Draw vertical line (stem)
+                sparklineCtx.strokeStyle = col;
+                sparklineCtx.lineWidth = 2;
+                sparklineCtx.beginPath();
+                sparklineCtx.moveTo(x, lineY);
+                sparklineCtx.lineTo(x, y);
+                sparklineCtx.stroke();
+
+                // Draw the dot
+                sparklineCtx.fillStyle = col;
+                sparklineCtx.beginPath();
+                sparklineCtx.arc(x, y, 2, 0, Math.PI * 2);
+                sparklineCtx.fill();
+            }
+        }
+
+        /** Updates all major score and strategic imprint metrics. */
+        function updateUI() {
+            playerScoreEl.textContent = Math.abs(playerScore); 
+            partnerScoreEl.textContent = Math.abs(partnerScore);
+            
+            volatilityIndexEl.textContent = `${volatilityIndex}%`;
+            instabilityTaxEl.textContent = instabilityTax;
+            
+            // Update Round Counter with a label for accessibility
+            roundCounterEl.textContent = roundCount; 
+            roundCounterEl.setAttribute('aria-label', `Round ${roundCount}`); 
+            
+            probDisplay.textContent = `${Math.round(randomCooperateProb * 100)}%`; 
+            
+            // Strategic Balance Gauge Logic
+            const totalStrategicMoves = cAfterDCount + dAfterCCount;
+            let forgivenessGaugePercent = 0;
+            let exploitationGaugePercent = 0;
+
+            if (totalStrategicMoves > 0) {
+                forgivenessGaugePercent = Math.round((cAfterDCount / totalStrategicMoves) * 100);
+                exploitationGaugePercent = Math.round((dAfterCCount / totalStrategicMoves) * 100);
+            }
+            
+            forgivenessScoreEl.textContent = `${forgivenessGaugePercent}%`;
+            exploitationScoreEl.textContent = `${exploitationGaugePercent}%`;
+            
+            forgivenessFillEl.style.width = `${forgivenessGaugePercent}%`;
+            exploitationFillEl.style.width = `${exploitationGaugePercent}%`;
+
+            updateScoreColors();
+            drawSparkline(); 
+        }
+
+        /** Handles the visual feedback pulse on the outcome card, gated by reduced motion. */
+        function displayOutcome(outcome, totalP1Penalty, p2ScoreChange, vTax) {
+            
+            // FIX: Use resolveColor for robustness
+            const outcomeColor = resolveColor(outcome.color);
+
+            outcomeMessageEl.innerHTML = `<span style="color: ${outcomeColor};" class="font-black">${outcome.emoji} ${outcome.message}</span>`;
+            
+            let details = `P1 Penalty: ${Math.abs(totalP1Penalty)} | P2 Penalty: ${Math.abs(p2ScoreChange)}`;
+            
+            if (vTax) {
+                details += ` | V-TAX: +${Math.abs(vTax)}`;
+            }
+
+            outcomeDetailsEl.textContent = details;
+
+            if (!prefersReduced) {
+                // Use resolved color for the box shadow pulse
+                outcomeCardEl.style.boxShadow = `0 0 20px ${outcomeColor}, 0 4px 10px var(--color-shadow)`;
+                
+                setTimeout(() => {
+                    outcomeCardEl.style.boxShadow = ''; 
+                }, 100); 
+            }
+        }
+
+        /** Calculates the Volatility Index based on the player's last N moves. */
+        function calculateVolatilityIndex() {
+            if (moveHistory.length < 2) {
+                volatilityIndex = 0;
+                return;
+            }
+            
+            const analysisWindow = moveHistory.slice(-CONFIG.V_INDEX_WINDOW);
+            let changes = 0;
+            
+            for (let i = 1; i < analysisWindow.length; i++) {
+                if (analysisWindow[i].player !== analysisWindow[i - 1].player) {
+                    changes++;
+                }
+            }
+
+            const maxChanges = analysisWindow.length > 1 ? analysisWindow.length - 1 : 1;
+            volatilityIndex = Math.round((changes / maxChanges) * 100);
+        }
+
+        /** Tracks the player's strategic tendencies. */
+        function trackStrategicImprints(playerChoice) {
+            if (moveHistory.length <= 1) return;
+
+            const previousMove = moveHistory[moveHistory.length - 2];
+            const prevPartner = previousMove.partner;
+
+            if (prevPartner === 'D') {
+                if (playerChoice === 'C') { cAfterDCount++; } // Forgiveness: C after Partner D
+            }
+            
+            if (prevPartner === 'C') {
+                if (playerChoice === 'D') { dAfterCCount++; } // Exploitation: D after Partner C
+            }
+        }
+        
+        /** LCG Pseudo-Random Number Generator. Returns [0, 1). */
+        function seededRandom() {
+            seed = (LCG_A * seed + LCG_C) % LCG_M;
+            return seed / LCG_M;
+        }
+
+        /** Determines the opponent's move based on the selected strategy. */
+        function getPartnerChoice(strategy) {
+            if (strategy === 'titfortat') {
+                if (moveHistory.length === 0) { 
+                    return 'C'; 
+                } 
+                return moveHistory[moveHistory.length - 1].player;
+            }
+            
+            if (strategy === 'alwaysdefect') {
+                return 'D';
+            }
+            
+            if (strategy === 'grimtrigger') {
+                const playerDefected = moveHistory.some(move => move.player === 'D');
+                return playerDefected ? 'D' : 'C'; 
+            }
+
+            if (strategy === 'random') {
+                return seededRandom() < randomCooperateProb ? 'C' : 'D'; 
+            }
+            
+            return 'C'; 
+        }
+
+        /** Runs one round of the dilemma. */
+        function playRound(playerChoice) {
+            
+            cooperateBtn.disabled = true;
+            defectBtn.disabled = true;
+
+            const partnerChoice = getPartnerChoice(currentStrategy);
+
+            // Temporarily push the move to be available for getPartnerChoice in the next round
+            moveHistory.push({ player: playerChoice, partner: partnerChoice, temp: true }); 
+
+            roundCount++; 
+            
+            const currentMoveIndex = moveHistory.length - 1;
+            const outcomeData = CONFIG.PAYOFF_MATRIX[playerChoice][partnerChoice];
+            const p1ScoreChange = outcomeData.p1;
+            const p2ScoreChange = outcomeData.p2;
+
+            // Update the history record with full score data
+            moveHistory[currentMoveIndex] = { 
+                round: roundCount,
+                player: playerChoice, 
+                partner: partnerChoice, 
+                p1s: p1ScoreChange, 
+                p2s: p2ScoreChange 
+            };
+            
+            // 2. Calculate Metrics & Taxes
+            calculateVolatilityIndex();
+            trackStrategicImprints(playerChoice); 
+
+            let vTaxPenalty = 0;
+            if (volatilityIndex >= CONFIG.V_TAX_THRESHOLD_HIGH) { 
+                vTaxPenalty = -2; 
+            } else if (volatilityIndex >= CONFIG.V_TAX_THRESHOLD_LOW) { 
+                vTaxPenalty = -1; 
+            }
+            
+            instabilityTax += Math.abs(vTaxPenalty);
+            
+            const totalP1Penalty = p1ScoreChange + vTaxPenalty;
+
+            playerScore += totalP1Penalty;
+            partnerScore += p2ScoreChange;
+            
+            // 3. UI Update & Feedback
+            updateUI(); 
+            displayOutcome(outcomeData, totalP1Penalty, p2ScoreChange, vTaxPenalty);
+            logHistory(playerChoice, partnerChoice, p1ScoreChange, p2ScoreChange, vTaxPenalty);
+
+            // 4. Re-enable buttons after a brief pause
+            setTimeout(() => {
+                cooperateBtn.disabled = false;
+                defectBtn.disabled = false;
+            }, 100); 
+        }
+        
+        /** Logs the transaction using color chips and stable display. */
+        function logHistory(p1, p2, p1s, p2s, vTax) {
+            const emptyMessage = document.getElementById('log-empty-message');
+            if (emptyMessage) { historyLogContainerEl.removeChild(emptyMessage); }
+            
+            const p1ChipClass = p1 === 'C' ? 'chip-c' : 'chip-d';
+            const p2ChipClass = p2 === 'C' ? 'chip-c' : 'chip-d';
+            
+            const absP1s = Math.abs(p1s);
+            const absP2s = Math.abs(p2s);
+            const absVTax = Math.abs(vTax);
+            const totalP1 = absP1s + absVTax;
+
+            const vTaxDisplay = absVTax > 0 ? `<span class="text-xs text-[var(--color-defect)] font-bold ml-1">($+${absVTax})</span>` : '';
+
+            const listItem = document.createElement('div');
+            
+            // FIX: Use current children count for stable zebra striping
+            const isEven = historyLogContainerEl.children.length % 2 === 0;
+            const bgClass = isEven ? 'bg-[var(--color-log-alt)]' : 'bg-[var(--color-bg-card)]';
+
+            listItem.className = `log-row flex justify-between items-center text-sm py-2 px-1 border-b border-[var(--color-border-subtle)] transition duration-100 font-precision ${bgClass}`;
+
+            listItem.innerHTML = `
+                <span class="w-1/12 text-center text-[var(--color-text-secondary)] font-semibold">R${roundCount}</span>
+                <span class="w-2/12 text-center"><span class="move-chip ${p1ChipClass}">${p1}</span></span>
+                <span class="w-2/12 text-center"><span class="move-chip ${p2ChipClass}">${p2}</span></span>
+                <span class="w-2/12 text-right font-bold text-[var(--color-text-primary)]">${totalP1}${vTaxDisplay}</span>
+                <span class="w-2/12 text-right text-[var(--color-text-secondary)]">${absP2s}</span>
+                <span class="w-2/12 text-right text-[var(--color-text-secondary)]">${volatilityIndex}%</span>
+            `;
+            
+            historyLogContainerEl.prepend(listItem);
+        }
+
+        /** Exports the move history to a CSV file, including metadata. */
+        function exportHistoryToCSV() {
+            if (moveHistory.length === 0) {
+                displayOutcome(CONFIG.PAYOFF_MATRIX['C']['C'], 0, 0, 0); // Use a neutral outcome for message
+                outcomeMessageEl.innerHTML = `<span class="text-[var(--color-accent-blue)] font-black">LOG EMPTY</span>`;
+                outcomeDetailsEl.textContent = 'Play a few rounds before exporting the log.';
+                return;
+            }
+
+            // FIX: Use initialSeed for reproducible export metadata
+            let csvContent = 
+              `Seed:${initialSeed}\n` +
+              `Strategy:${currentStrategy}\n` +
+              `Random_P(Cooperate):${Math.round(randomCooperateProb * 100)}%\n` +
+              "Round,Player_Move,Partner_Move,Player_Penalty,Partner_Penalty,Volatility_Index (Recalc 10)\n";
+
+            // Process sequentially to accurately recalculate V-Index for each row in the export
+            for (let i = 0; i < moveHistory.length; i++) {
+                const move = moveHistory[i];
+                const tempHistory = moveHistory.slice(0, i + 1);
+                
+                let vIndex = 0;
+                let vTax = 0;
+                
+                if (tempHistory.length >= 2) {
+                    let changes = 0;
+                    const analysisWindow = tempHistory.slice(-CONFIG.V_INDEX_WINDOW);
+                    for (let j = 1; j < analysisWindow.length; j++) {
+                        if (analysisWindow[j].player !== analysisWindow[j - 1].player) {
+                            changes++;
+                        }
+                    }
+                    const maxChanges = analysisWindow.length > 1 ? analysisWindow.length - 1 : 1;
+                    vIndex = Math.round((changes / maxChanges) * 100);
+                    
+                    if (vIndex >= CONFIG.V_TAX_THRESHOLD_HIGH) { vTax = 2; } 
+                    else if (vIndex >= CONFIG.V_TAX_THRESHOLD_LOW) { vTax = 1; }
+                }
+
+                const playerTotalPenalty = Math.abs(move.p1s) + vTax;
+                const row = [
+                    move.round,
+                    move.player,
+                    move.partner,
+                    playerTotalPenalty,
+                    Math.abs(move.p2s),
+                    vIndex
+                ].join(',');
+                csvContent += row + "\n";
+            }
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', `imprint_log_${new Date().toISOString().slice(0, 10)}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function saveSettings() {
+            localStorage.setItem('theme', document.documentElement.getAttribute('data-theme'));
+            localStorage.setItem('currentStrategy', currentStrategy);
+            localStorage.setItem('seed', randomSeedInput.value);
+            localStorage.setItem('randomCooperateProb', randomProbSlider.value);
+        }
+
+        function loadSettings() {
+            const storedStrategy = localStorage.getItem('currentStrategy');
+            const storedSeed = localStorage.getItem('seed');
+            const storedProb = localStorage.getItem('randomCooperateProb');
+
+            if (storedStrategy) {
+                currentStrategy = storedStrategy;
+                const radio = document.getElementById(`strategy-${storedStrategy}`);
+                if (radio) radio.checked = true;
+            }
+
+            if (storedSeed) {
+                randomSeedInput.value = storedSeed;
+            } else {
+                randomSeedInput.value = Math.floor(Math.random() * 99999) + 1;
+            }
+
+            if (storedProb) {
+                randomCooperateProb = parseInt(storedProb) / 100;
+                randomProbSlider.value = storedProb;
+                probDisplay.textContent = `${storedProb}%`;
+            }
+        }
+
+        function resetGame() {
+            const inputSeed = Math.abs(parseInt(randomSeedInput.value) || 0);
+            
+            // FIX: Store initialSeed separately and use it to initialize LCG seed
+            initialSeed = inputSeed < 1 ? 1 : inputSeed; 
+            seed = initialSeed;
+
+            playerScore = 0;
+            partnerScore = 0;
+            roundCount = 0;
+            moveHistory = [];
+            volatilityIndex = 0;
+            cAfterDCount = 0;
+            dAfterCCount = 0;
+            instabilityTax = 0;
+            
+            // Update the global randomCooperateProb based on the slider state
+            randomCooperateProb = parseInt(randomProbSlider.value) / 100;
+            
+            updateUI(); 
+            
+            historyLogContainerEl.innerHTML = `
+                <div id="log-empty-message" class="text-center py-6 text-[var(--color-text-secondary)] text-sm italic">
+                    Simulation reset (Seed: ${initialSeed}). Transactions will appear here.
+                </div>
+            `;
+
+            outcomeMessageEl.innerHTML = 'AWAITING INPUT';
+            outcomeDetailsEl.textContent = 'Select your first move to begin the new protocol.';
+            
+            outcomeCardEl.style.boxShadow = ''; 
+            
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+            
+            saveSettings(); 
+        }
+        
+        /** Handler to make labels fully keyboard operable for radio selection. */
+        function handleLabelKeydown(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                event.target.click(); 
+            }
+        }
+
+        /** Handles keyboard input for shortcuts with debounce. */
+        function handleKeydown(event) {
+            
+            const focusedElement = document.activeElement;
+            const isTyping = focusedElement.matches('input[type="text"], input[type="number"], textarea, [contenteditable="true"]');
+            
+            if (isTyping || keyInputDebouncing) return; 
+
+            const key = event.key.toUpperCase();
+            
+            // Global Reset Shortcut
+            if (key === 'R' && !event.altKey && !event.ctrlKey && !event.metaKey) {
+                event.preventDefault();
+                resetGame();
+                return;
+            }
+
+            if (cooperateBtn.disabled || defectBtn.disabled) return;
+
+            if (key === 'C' || key === 'D') {
+                event.preventDefault(); 
+                
+                keyInputDebouncing = true;
+                setTimeout(() => {
+                    keyInputDebouncing = false;
+                }, 100); 
+
+                playRound(key);
+            }
+        }
+        
+        // --- Theme Management ---
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            if (theme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+            // Force redraw of canvas when theme changes to ensure colors update
+            if (roundCount > 0) {
+                 drawSparkline();
+            }
+        }
+
+        function initializeTheme() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+        }
+
+        function toggleDarkMode() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        }
+
+
+        // --- Initialization Function ---
+        function initializeGame() {
+            // Load persisted theme/settings first
+            initializeTheme();
+            loadSettings();
+
+            // Run initial reset to apply loaded state and reset scores
+            resetGame();
+
+            // --- Event Listeners ---
+            cooperateBtn.addEventListener('click', () => playRound('C'));
+            defectBtn.addEventListener('click', () => playRound('D'));
+            resetBtn.addEventListener('click', resetGame);
+            themeToggleButton.addEventListener('click', toggleDarkMode);
+            exportBtn.addEventListener('click', exportHistoryToCSV);
+            document.addEventListener('keydown', handleKeydown); 
+            
+            randomSeedInput.addEventListener('change', resetGame);
+            
+            // Slider Listener: input updates display; change triggers reset/game logic
+            randomProbSlider.addEventListener('input', (event) => {
+                randomCooperateProb = parseInt(event.target.value) / 100;
+                probDisplay.textContent = `${event.target.value}%`;
+                saveSettings(); 
+            });
+            randomProbSlider.addEventListener('change', resetGame); // Reset game if they commit a new prob
+
+            strategySelector.addEventListener('change', (event) => {
+                currentStrategy = event.target.value;
+                resetGame(); 
+                // Find the label text corresponding to the selected radio button
+                const selectedLabel = document.querySelector(`label[for="${event.target.id}"]`).textContent.trim();
+                outcomeMessageEl.innerHTML = `<span class="text-[var(--color-accent-blue)] font-black">${selectedLabel}</span> SELECTED.`;
+                outcomeDetailsEl.textContent = 'Game state reset. Initiate new protocol.';
+                saveSettings(); 
+            });
+
+            // Bind keyboard handler for all strategy labels
+            document.querySelectorAll('#strategy-selector label').forEach(lab => {
+                lab.addEventListener('keydown', handleLabelKeydown);
+            });
+
+            cooperateBtn.disabled = false;
+            defectBtn.disabled = false;
+            
+            // Add window resize listener to handle canvas scaling on fluid layouts
+            window.addEventListener('resize', () => {
+                if (roundCount > 0) {
+                    drawSparkline();
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeGame);
+    </script>
+</body>
+</html>
