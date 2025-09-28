@@ -1,4 +1,4 @@
-# IMPRINT – Strategy Lab
+# IMPRINT - Strategy Lab
 
 Interactive iterated prisoner’s dilemma simulator exploring reciprocity, stability, and the long-term cost of short-sighted choices.
 
